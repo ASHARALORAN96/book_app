@@ -41,31 +41,33 @@
 
                 <input name="title" type="text" value="<%= book.title %>">
                 <br>
-                <input name="author" type="text" value="<%= book.author %>">
+                <input name="author" type="text" value="<%= book.authors %>">
                 <br>
                 <input name="id" type="text" value="<%= book.id %>">
                 <br>
-                <input name="image" type="text" value=" <%= book.image %>">
+                <input name="image" type="text" value=" <%= book.imgUrl %>">
                 <br>
-                <input name="info" type="text" value="<%= book.description %>">
+                <input name="info" type="text" value="<%= book.desc %>">
                 <br>
                 <input type="text" name="shelf" placeholder="Enter a Bookshelf Name" required>
                 <br>
                 <button type="submit">Add to Database</button>
             </form>
-            <script>
-                $('#<%= book.etag %>').click(showForm);
-                function showForm() {
-                    $('#<%= book.id %>').show();
-                    $('.div').hide();
-                }
-            </script>
+
         </li>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+            $('#<%= book.etag %>').click(showForm);
+            function showForm() {
+                $('#<%= book.id %>').show();
+                $('.div').hide();
+            }
+        </script>
 
         <% }) %>
     </ul>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <script src="public/js/app.js"></script>
 
 </html>
