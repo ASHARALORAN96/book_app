@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="stylesheet" href="../../public/styles/base.css" type="text/css">
     <link rel="stylesheet" href="../../public/styles/modules.css" type="text/css">
     <link rel="stylesheet" href="../../public/styles/layout.css" type="text/css">
-
     <title>books</title>
 </head>
-
 <body>
     <header>
         <nav>
@@ -36,7 +33,7 @@
                 <p class="text"><%= book.desc %></p>
                 <button id="<%= book.etag %>">Select this book</a></button>
             </div>
-            <form id="<%= book.id %>" class="hide-me" action="/searches" method="POST" style="display: none;"
+            <form id="<%= book.id %>" class="hide-me" action="/books/detail" method="POST" style="display: none;"
                 name="hidden">
 
                 <input name="title" type="text" value="<%= book.title %>">
@@ -51,9 +48,27 @@
                 <br>
                 <input type="text" name="shelf" placeholder="Enter a Bookshelf Name" required>
                 <br>
-                <button type="submit">Add to Database</button>
-            </form>
+                <input type="submit" name="submit" id="DB" >Add to Database
 
+                
+            </form>
+            <!-- <form id="<%= book.id %>" class="hide-me" action="/searches" method="POST" style="display: none;"
+                name="hidden">
+
+                <input name="title" type="text" value="<%= book.title %>">
+                <br>
+                <input name="author" type="text" value="<%= book.authors %>">
+                <br>
+                <input name="id" type="text" value="<%= book.id %>">
+                <br>
+                <input name="image" type="text" value=" <%= book.imgUrl %>">
+                <br>
+                <input name="info" type="text" value="<%= book.desc %>">
+                <br>
+                <input type="text" name="shelf" placeholder="Enter a Bookshelf Name" required>
+                <br>
+                <button type="submit" id="DB"><a href="/books/detail"> Add to Database</a></button>
+            </form> -->
         </li>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script>
@@ -63,7 +78,6 @@
                 $('.div').hide();
             }
         </script>
-
         <% }) %>
     </ul>
 </body>

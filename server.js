@@ -18,7 +18,7 @@ app.get('/books/detail' , addBook); // function four
 app.post('/books/detail' , processBook); // function five
 app.get('/books/show/:books_id' , addBookById) // function six
 // app.get('/add',getDataFromHidden)// function 7
-app.post('/add',renderHiddenForm) // function 8
+// app.post('/add',renderHiddenForm) // function 8
 
 function handleError(error, response){
     response.render('pages/error', {error: error});
@@ -68,7 +68,7 @@ function addBookById( req ,res){
     let values = [id];
     client.query(SQL ,values)
     .then ( data =>{
-        res.render( 'pages/books/show' , { book : data.rows[0]})
+        res.render( 'pages/books/show' , { books : data.rows[0]})
     }).catch(err => handleError(err));
 
 }
@@ -76,10 +76,10 @@ function addBookById( req ,res){
 // function getDataFromHidden(req ,res) {
 //     res.render('pages/searches');
 // }
-function renderHiddenForm(req,res){
-    res.redirect('pages/searches');
+// function renderHiddenForm(req,res){
+//     res.redirect('pages/searches');
 
-}
+// }
 // constractuer function 
         function Book(data) {
             // The if statment inside this function from the demo // but it's really amazing and we learn sth new 
