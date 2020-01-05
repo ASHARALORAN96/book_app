@@ -17,6 +17,8 @@ app.get ('/' , getAllBooks); // function three
 app.get('/books/detail' , addBook); // function four
 app.post('/books/detail' , processBook); // function five
 app.get('/books/show/:books_id' , addBookById) // function six
+// app.get('/add',getDataFromHidden)// function 7
+app.post('/add',renderHiddenForm) // function 8
 
 function handleError(error, response){
     response.render('pages/error', {error: error});
@@ -66,13 +68,23 @@ function addBookById( req ,res){
     let values = [id];
     client.query(SQL ,values)
     .then ( data =>{
-        res.render( 'pages/books/show' , { books : data.rows[0]})
+        res.render( 'pages/books/show' , { book : data.rows[0]})
     }).catch(err => handleError(err));
+
+}
+//function 7 
+// function getDataFromHidden(req ,res) {
+//     res.render('pages/searches');
+// }
+function renderHiddenForm(req,res){
+    res.redirect('pages/searches');
 
 }
 // constractuer function 
         function Book(data) {
             // The if statment inside this function from the demo // but it's really amazing and we learn sth new 
+            this.id = data.id;
+            this.etag=data.etag;
             this.title = data.volumeInfo.title ? data.volumeInfo.title : "No Title Available";
             this.imgUrl = (data.volumeInfo.imageLinks && data.volumeInfo.imageLinks.thumbnail) ? data.volumeInfo.imageLinks.thumbnail : "https://i.imgur.com/J5LVHEL.jpg";
             this.authors = data.volumeInfo.authors ? data.volumeInfo.authors : "No Authors";

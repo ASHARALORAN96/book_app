@@ -31,7 +31,7 @@
                 <p><%= book.authors %></p>
                  <p class="text"><%= book.desc %></p>
             </li>
-            <button><a href="books/detail.ejs">view Details</a></button>
+            <button><a href="/books/show/<%= book.id %>">view Details</a></button>
         <% }) %>
     </ul>
 </body>
