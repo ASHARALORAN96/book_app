@@ -18,7 +18,8 @@ app.post('/searches', getDataFromForm); // function two
 app.get ('/' , getAllBooks); // function three 
 app.get('/books/detail' , addBook); // function four
 app.post('/books/detail' , processBook); // function five
-app.get('/books/show/:books_id' , addBookById) // function six
+app.get('/books/detail/:allbooks_id' , addBookById) // function six
+// app.get('/add',getDataFromHidden)// function 7
 // app.post('/add',renderHiddenForm) // function 8
 app.put('/update/:book_id', updateBook) ;// function 7
 
@@ -29,13 +30,14 @@ function handleError(error, response){
 function searchForm (req, res) {
     res.render('pages/searches/new');
 };
+
 // function two
 function getDataFromForm(req, res) {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${req.body.selectBy}+${req.body.input}`;
-    superagent.get(url)
+   return superagent.get(url)
         .then(data => {
             let element = data.body.items;
-            let book = element.map(data => new Book(data));
+            let book = element.map(data => {return new Book(data)});
             res.render('pages/searches/show', { books: book });
         })
     };
@@ -44,7 +46,7 @@ function getAllBooks(req ,res){
     let SQL = `SELECT * FROM books ;`;
     client.query(SQL)
     .then( data => {
-        res.render('pages/index' , {books : data.rows});
+        res.render('pages/index.ejs' , {allbooks : data.rows});
     }).catch(err => handleError(err));
 }
 // function four
@@ -65,12 +67,12 @@ function processBook (req ,res){
 // function six
 function addBookById( req ,res){
     // from database books_id_seq
-    let id = req.params.books_id;
+    let id = req.params.allbooks_id;
     let SQL =`SELECT * FROM books WHERE id=$1`;
     let values = [id];
     client.query(SQL ,values)
     .then ( data =>{
-        res.render( 'pages/books/show' , { books : data.rows[0]})
+        res.render( 'pages/books/detail' , { bookChouse : data.rows[0]})
     }).catch(err => handleError(err));
 
 }
