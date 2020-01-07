@@ -9,7 +9,9 @@ const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static('public'));
+const methodOverride = require('method-override');
 app.set('view engine', 'ejs');
+app.use(methodOverride('_method')) ;
 
 app.get('/searches/new', searchForm); // function one 
 app.post('/searches', getDataFromForm); // function two 
@@ -17,8 +19,8 @@ app.get ('/' , getAllBooks); // function three
 app.get('/books/detail' , addBook); // function four
 app.post('/books/detail' , processBook); // function five
 app.get('/books/show/:books_id' , addBookById) // function six
-// app.get('/add',getDataFromHidden)// function 7
 // app.post('/add',renderHiddenForm) // function 8
+app.put('/update/:book_id', updateBook) ;// function 7
 
 function handleError(error, response){
     response.render('pages/error', {error: error});
@@ -73,13 +75,16 @@ function addBookById( req ,res){
 
 }
 //function 7 
-// function getDataFromHidden(req ,res) {
-//     res.render('pages/searches');
-// }
-// function renderHiddenForm(req,res){
-//     res.redirect('pages/searches');
+function updateBook (req,res){
+    let { title, author, isbn, image, description, bookshelf} = req.body ;
+  let SQL = 'UPDATE books SET author=$1, title=$2, isbn=$3, image_url=$4, description=$5, bookshelf=$6 WHERE id=$7 ;';
+  let values =[author, title, isbn, image, description ,bookshelf, req.params.book_id];
+  return client.query(SQL, values)
+    .then(() => {
 
-// }
+      return res.redirect(`/details/${req.params.task_id}`);
+    })
+}
 // constractuer function 
         function Book(data) {
             // The if statment inside this function from the demo // but it's really amazing and we learn sth new 
