@@ -32,24 +32,25 @@
                 <p><%= book.authors %></p>
                 <p class="text"><%= book.desc %></p>
                 <button id="<%= book.etag %>">Select this book</a></button>
+                <form id="<%= book.id %>" class="hide-me" action="/books/detail" method="POST" style="display: none;"
+                    name="hidden">
+    
+                    <input name="title" type="text" value="<%= book.title %>">
+                    <br>
+                    <input name="author" type="text" value="<%= book.authors %>">
+                    <br>
+                    <input name="id" type="text" value="<%= book.id %>">
+                    <br>
+                    <input name="image" type="text" value=" <%= book.imgUrl %>">
+                    <br>
+                    <input name="info" type="text" value="<%= book.desc %>">
+                    <br>
+                    <input type="text" name="shelf" placeholder="Enter a Bookshelf Name" required>
+                    <br>
+                    <!-- <input type="submit" name="submit" id="DB" >Add to Database     -->
+                    <button type="submit" name="submit" id="DB"><a href="/books/detail"></a>add to DataBase</button>
+                </form>
             </div>
-            <form id="<%= book.id %>" class="hide-me" action="/books/detail" method="POST" style="display: none;"
-                name="hidden">
-
-                <input name="title" type="text" value="<%= book.title %>">
-                <br>
-                <input name="author" type="text" value="<%= book.authors %>">
-                <br>
-                <input name="id" type="text" value="<%= book.id %>">
-                <br>
-                <input name="image" type="text" value=" <%= book.imgUrl %>">
-                <br>
-                <input name="info" type="text" value="<%= book.desc %>">
-                <br>
-                <input type="text" name="shelf" placeholder="Enter a Bookshelf Name" required>
-                <br>
-                <input type="submit" name="submit" id="DB" >Add to Database    
-            </form>
             <!-- <form id="<%= book.id %>" class="hide-me" action="/searches" method="POST" style="display: none;"
                 name="hidden">
 
