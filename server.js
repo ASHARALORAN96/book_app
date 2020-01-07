@@ -27,6 +27,7 @@ function handleError(error, response){
 function searchForm (req, res) {
     res.render('pages/searches/new');
 };
+
 // function two
 function getDataFromForm(req, res) {
     const url = `https://www.googleapis.com/books/v1/volumes?q=${req.body.selectBy}+${req.body.input}`;
