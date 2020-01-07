@@ -10,6 +10,11 @@
     border: 1px solid #ccc;
     margin-left: 3pc;
 }
+ .desc{
+    width: 50%;
+    height: 10pc;
+    overflow: auto;
+}
 }
 @media (max-width: 768px){
     .text{
@@ -23,4 +28,9 @@
         margin-left: 2pc;
         border: 1px solid #ccc;
     } 
+}
+.desc{
+    overflow: auto;
+    width:50%;
+    height: 10pc;
 }

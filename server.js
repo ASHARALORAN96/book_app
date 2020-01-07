@@ -21,7 +21,8 @@ app.post('/books/detail' , processBook); // function five
 app.get('/books/detail/:allbooks_id' , addBookById) // function six
 // app.get('/add',getDataFromHidden)// function 7
 // app.post('/add',renderHiddenForm) // function 8
-app.put('/update/:book_id', updateBook) ;// function 7
+app.put('/update/:book_id', updateBook)// function 7
+app.delete('/delete/:the_book' , deleteBook) // function 8
 
 function handleError(error, response){
     response.render('pages/error', {error: error});
@@ -83,9 +84,22 @@ function updateBook (req,res){
   let values =[author, title, isbn, image, description ,bookshelf, req.params.book_id];
   return client.query(SQL, values)
     .then(() => {
-
-      return res.redirect(`/details/${req.params.task_id}`);
+      return res.redirect(`/books/detail/${req.params.book_id}`);
     })
+}
+
+
+// function 8
+
+function deleteBook(req , res){
+    let SQL = `DELETE FROM books WHERE id=$1 ;` ;
+    let values = [req.params.the_book];
+    return client.query(SQL , values)
+    .then(() => {
+
+      return res.redirect('/');
+    })
+
 }
 // constractuer function 
         function Book(data) {
