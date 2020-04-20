@@ -1,0 +1,20 @@
+/* @media (min-width: 960px) {
+    .continer{
+        width: 960px;
+    }
+}
+@media (min-width: 767px) {
+    .continer{
+        width: 960px;
+    }
+}
+@media (min-width: 880px){
+    .continer{
+        width: 960px;
+    }  
+} */
+body{
+    display: grid;
+    background-color: rgb(96, 146, 72);
+    
+} 
